@@ -60,10 +60,10 @@ const Todo = () => {
     }
 
     setIsEditId(id);
-    setIsEdit(!isEdit);
+    setIsEdit(true);
   };
   const saveEdit = (id: number, text: string): void => {
-    setIsEdit(!isEdit);
+    setIsEdit(false);
     if (text !== checkText) {
       Swal.fire({
         title: "Are you sure?",
@@ -107,7 +107,6 @@ const Todo = () => {
                 onClick={(): void => {
                   setCheckText(newText);
                   saveEdit(todo.id, newText);
-                  setIsEdit(!isEdit);
                 }}
                 className="bg-violetColor rounded-[8px] text-focusedColor text-[16px] text-semibold py-[4px] px-[10px] hover:bg-focusedColor transition-all duration-300  ml-[10px] hover:text-violetColor"
               >
