@@ -1,5 +1,5 @@
 import Swal from "sweetalert2";
-import { useContext, useState, useRef } from "react";
+import { useContext, useState } from "react";
 import { Context } from "../../context/Provider";
 import toast from "react-hot-toast";
 
@@ -21,8 +21,6 @@ interface IsEditIdStae {
 const Todo = () => {
   const [isEdit, setIsEdit] = useState<isEditState | boolean>(false);
   const [isEditId, setIsEditId] = useState<IsEditIdStae | number>(0);
-
-  const inputEditRef = useRef<null | HTMLInputElement>(null);
 
   const [newText, setNewText] = useState<string>("");
   const [checkText, setCheckText] = useState<string>(newText);
@@ -55,15 +53,11 @@ const Todo = () => {
   };
 
   const editItem = (id: number): void => {
-    if (inputEditRef.current) {
-      inputEditRef.current.focus();
-    }
-
     setIsEditId(id);
-    setIsEdit(true);
+    setIsEdit(!isEdit);
   };
   const saveEdit = (id: number, text: string): void => {
-    setIsEdit(false);
+    setIsEdit(!isEdit);
     if (text !== checkText) {
       Swal.fire({
         title: "Are you sure?",
@@ -96,7 +90,6 @@ const Todo = () => {
                 onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
                   setNewText(e.target.value)
                 }
-                ref={inputEditRef}
                 className="bg-transparent border-none text-white outline-none placeholder:text-inputColor w-full"
                 type="text"
                 placeholder="Editing ..."
@@ -107,6 +100,7 @@ const Todo = () => {
                 onClick={(): void => {
                   setCheckText(newText);
                   saveEdit(todo.id, newText);
+                  setIsEdit(!isEdit);
                 }}
                 className="bg-violetColor rounded-[8px] text-focusedColor text-[16px] text-semibold py-[4px] px-[10px] hover:bg-focusedColor transition-all duration-300  ml-[10px] hover:text-violetColor"
               >
