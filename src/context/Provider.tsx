@@ -10,7 +10,6 @@ if (initValue) {
     done: [],
   };
 }
-console.log(initState);
 
 interface TodoObj {
   id: number;
