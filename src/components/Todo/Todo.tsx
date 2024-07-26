@@ -141,6 +141,13 @@ const Todo = () => {
             </li>
           )
         )}
+        {data.length === 0 && (
+          <li className="bg-primary rounded-[10px] flex py-[17px] px-[20px] justify-between items-center">
+            <p className="text-violetColor mx-auto text-[20px] font-semibold">
+              No tasks to do
+            </p>
+          </li>
+        )}
       </ul>
     </div>
   );

@@ -40,6 +40,13 @@ const Done = () => {
             </p>
           </li>
         ))}
+        {data.length === 0 && (
+          <li className="bg-primary rounded-[10px] flex py-[16px] justify-between items-center">
+            <p className="text-lightGreen mx-auto text-[20px] font-semibold">
+              No task has been completed yet
+            </p>
+          </li>
+        )}
       </ul>
     </div>
   );
