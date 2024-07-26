@@ -58,7 +58,8 @@ const Todo = () => {
   };
   const saveEdit = (id: number, text: string): void => {
     setIsEdit(!isEdit);
-    if (text !== checkText) {
+
+    if (text === checkText) {
       Swal.fire({
         title: "Are you sure?",
         showCancelButton: true,
@@ -69,6 +70,8 @@ const Todo = () => {
         if (result.isConfirmed) {
           toast.success("Saved!");
           dispatch({ type: "EDIT", payload: { id, text } });
+        } else {
+          setIsEdit(!isEdit);
         }
       });
     }
@@ -87,9 +90,10 @@ const Todo = () => {
               className="bg-primary rounded-[10px] flex py-[19px] px-[20px] justify-between items-center"
             >
               <input
-                onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
-                  setNewText(e.target.value)
-                }
+                onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
+                  setNewText(e.target.value);
+                  setCheckText(e.target.value);
+                }}
                 className="bg-transparent border-none text-white outline-none placeholder:text-inputColor w-full"
                 type="text"
                 placeholder="Editing ..."
